@@ -9,7 +9,7 @@ function App() {
       <header className="App-header">
         <FontAwesomeIcon icon="fas fa-cart-arrow-down" />
         <NavBar/>
-        <ItemListContainer/>
+        <ItemListContainer welcome="Welcome to Mashipa Store "/>
       </header>
     </div>
   );
