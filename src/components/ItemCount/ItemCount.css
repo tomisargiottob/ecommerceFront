@@ -1,0 +1,32 @@
+.item-count-container{
+  font-size: 1rem;
+}
+.item-count{
+  margin: 0 auto;
+  border:1px solid black;
+  width: 80%;
+  border-radius: 5px;
+}
+.ammount{
+	width: 100%;
+  margin: 0px;
+  border: none;
+  text-align: center;
+}
+.change-ammount{
+  text-align: center;
+  margin:0px;
+  background-color: white;
+  border: none;
+  color: #e67e2a;
+}
+input:focus{
+  border-width:0px;
+  border:none;
+}
+.add-to-cart{
+  margin-top: 5px;
+  border-radius: 5px;
+  width: 80%;
+  border: 1px solid black;
+}
