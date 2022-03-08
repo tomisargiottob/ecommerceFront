@@ -1,10 +1,22 @@
 import './ShopItem.css';
-import { Container } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
+import ItemCount from '../ItemCount/ItemCount';
 
-function ShopItem () {
+
+function ShopItem ({product}) {
 	return (
 		<Container className="shop-item-container">
-			Esto es un item dentro del List Container
+      <Row>
+			  <h3>
+          { product.name }
+        </h3>
+      </Row>
+      <Row>
+        <img src={ product.image } alt="" srcSet="" />
+      </Row>
+      <Row>
+        <ItemCount initial={ product.initial } stock={ product.stock } name={ product.name } />
+      </Row>
 		</Container>
 	)
 }

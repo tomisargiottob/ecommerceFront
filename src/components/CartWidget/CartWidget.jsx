@@ -6,7 +6,7 @@ import { faCartArrowDown } from '@fortawesome/fontawesome-free-solid'
 function CartWidget () {
 	return (
 		<Button className="cart-widget">
-			Carro
+			Carrito
 			<FontAwesomeIcon icon={faCartArrowDown} />
 		</Button>
 	)
