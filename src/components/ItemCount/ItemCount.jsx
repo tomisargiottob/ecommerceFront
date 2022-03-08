@@ -8,10 +8,13 @@ function ItemCount({ stock, initial=1, name }) {
   let [ammount, setAmmount] = useState(initial)
 
   const changeAmmount = (value) => {
-    if (value.nativeEvent?.data > stock) {
-      setAmmount(stock)
-    } else {
-      setAmmount(Number(value.nativeEvent?.data))
+    const changedAmmount = parseInt(value.nativeEvent?.data);
+    if (changedAmmount >= 0){
+      if (changedAmmount > stock) {
+        setAmmount(stock)
+      } else {
+        setAmmount(changedAmmount)
+      }
     }
   }
 	const onAdd = () => {
