@@ -15,7 +15,7 @@ import CartWidget from '../CartWidget/CartWidget';
 
 function NavBar() {
   return (
-    <Navbar fixed="top" bg="light" expand="lg">
+    <Navbar className="nav-bar" bg="light" expand="lg">
       <Container>
         <Navbar.Brand href="#home">
           <img

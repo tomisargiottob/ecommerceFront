@@ -33,7 +33,7 @@ function ItemCount({ stock, initial = 1, name }) {
   };
   const addToCart = () => {
     if (stock >= ammount) {
-      const item = `${name} + ${ammount > 1 ? 's' : ''}`;
+      const item = name + (ammount > 1 ? 's' : '');
       // eslint-disable-next-line no-console
       console.log(`Se agregarian ${ammount} ${item} al carro`);
     }
