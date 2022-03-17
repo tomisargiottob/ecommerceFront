@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Container } from 'react-bootstrap';
 import client from '../../helpers/client';
 import ItemDetail from '../ItemDetail/ItemDetail';
@@ -24,7 +25,10 @@ function ItemDetailContainer() {
     );
   }
   return (
-    <Container>Loading...</Container>
+    <Container className="loading">
+      Loading
+      <FontAwesomeIcon icon="fa fa-spinner" pulse />
+    </Container>
   );
 }
 

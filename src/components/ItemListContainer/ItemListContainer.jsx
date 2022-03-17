@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import ItemList from '../ItemList/ItemList';
@@ -21,7 +22,10 @@ function ItemListContainer({ welcome }) {
 
   if (loading) {
     return (
-      <Container> Loading ...</Container>
+      <Container className="loading">
+        Loading
+        <FontAwesomeIcon icon="fa fa-spinner" pulse />
+      </Container>
     );
   }
 
