@@ -1,12 +1,12 @@
 import {
   Container,
   Navbar,
-  NavDropdown,
   Nav,
   Form,
   FormControl,
   Button,
 } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 import { React } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavBar.css';
@@ -17,29 +17,27 @@ function NavBar() {
   return (
     <Navbar className="nav-bar" bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">
-          <img
-            alt=""
-            src={Logo}
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-          />
-          {' '}
-          Mashipa Uniformes
-        </Navbar.Brand>
+        <NavLink to="/">
+          <Navbar.Brand>
+            <img
+              alt=""
+              src={Logo}
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />
+            {' '}
+            Mashipa Uniformes
+          </Navbar.Brand>
+        </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Inicio</Nav.Link>
-            <Nav.Link href="#aboutUs">Quienes Somos</Nav.Link>
-            <NavDropdown title="Tienda" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#category/busos">Busos</NavDropdown.Item>
-              <NavDropdown.Item href="#category/remeras">Remeras</NavDropdown.Item>
-              <NavDropdown.Item href="#category/chombas">Chombas</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#category/combos">Combos</NavDropdown.Item>
-            </NavDropdown>
+            <NavLink to="/">Inicio</NavLink>
+            {/* <NavLink to="/aboutUs">Quienes Somos</NavLink> */}
+            <NavLink to="/categoria/buso">Busos</NavLink>
+            <NavLink to="/categoria/campera">Camperas</NavLink>
+            <NavLink to="/categoria/pantalon">Pantalones</NavLink>
           </Nav>
           <Form className="d-flex">
             <FormControl
@@ -51,7 +49,9 @@ function NavBar() {
             <Button variant="outline-success">Buscar</Button>
           </Form>
           <Nav>
-            <CartWidget />
+            <NavLink to="/carrito">
+              <CartWidget />
+            </NavLink>
           </Nav>
         </Navbar.Collapse>
       </Container>
