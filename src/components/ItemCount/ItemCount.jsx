@@ -9,7 +9,9 @@ import './ItemCount.css';
 import { useState, React } from 'react';
 import PropTypes from 'prop-types';
 
-function ItemCount({ stock, initial = 1, name }) {
+function ItemCount({
+  stock, initial = 1, price, addToCart,
+}) {
   const [ammount, setAmmount] = useState(initial);
 
   const changeAmmount = (value) => {
@@ -31,13 +33,7 @@ function ItemCount({ stock, initial = 1, name }) {
       setAmmount(ammount - 1);
     }
   };
-  const addToCart = () => {
-    if (stock >= ammount) {
-      const item = name + (ammount > 1 ? 's' : '');
-      // eslint-disable-next-line no-console
-      console.log(`Se agregarian ${ammount} ${item} al carro`);
-    }
-  };
+
   const dropDownOptions = [];
   for (let i = 1; i <= stock; i += 1) {
     dropDownOptions.push(
@@ -47,43 +43,70 @@ function ItemCount({ stock, initial = 1, name }) {
     );
   }
   return (
-    <Container className="item-count-container">
-      <Row className="item-count">
-        <Col xs={3}>
-          <button type="button" className="change-ammount" onClick={remove}>
-            <FontAwesomeIcon icon="fa-solid fa-minus" />
-          </button>
-        </Col>
-        <Col xs={6}>
-          <Dropdown className="d-inline mx-2 options" onSelect={changeAmmount}>
-            <Dropdown.Toggle id="dropdown-autoclose-true">
-              { ammount }
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              { dropDownOptions }
-            </Dropdown.Menu>
-          </Dropdown>
-        </Col>
-        <Col xs={3}>
-          <button type="button" className="change-ammount" onClick={onAdd}>
-            <FontAwesomeIcon icon="fa-solid fa-plus" />
-          </button>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <button type="button" className="add-to-cart" onClick={addToCart}>
-            Agregar al carrito
-          </button>
-        </Col>
-      </Row>
-    </Container>
+    <div>
+      { stock ? (
+        <Container className="item-count-container">
+          <Row>
+            <p>
+              <strong>
+                {`Precio Total: ${price * ammount} $`}
+              </strong>
+            </p>
+          </Row>
+          <Row className="item-count">
+            <Col xs={3}>
+              <button type="button" className="change-ammount" onClick={remove}>
+                <FontAwesomeIcon icon="fa-solid fa-minus" />
+              </button>
+            </Col>
+            <Col xs={6}>
+              <Dropdown className="d-inline mx-2 options" onSelect={changeAmmount}>
+                <Dropdown.Toggle id="dropdown-autoclose-true">
+                  { ammount }
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  { dropDownOptions }
+                </Dropdown.Menu>
+              </Dropdown>
+            </Col>
+            <Col xs={3}>
+              <button type="button" className="change-ammount" onClick={onAdd}>
+                <FontAwesomeIcon icon="fa-solid fa-plus" />
+              </button>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <button type="button" className="add-to-cart" onClick={addToCart}>
+                Agregar al carrito
+              </button>
+            </Col>
+          </Row>
+        </Container>
+      )
+        : (
+          <Container>
+            <Row>
+              <p>
+                {`Precio Unitario: ${price} $`}
+              </p>
+            </Row>
+            <Row>
+              <h1>No hay stock</h1>
+            </Row>
+          </Container>
+        )}
+    </div>
   );
 }
 ItemCount.propTypes = {
-  name: PropTypes.string.isRequired,
+  initial: PropTypes.number,
+  addToCart: PropTypes.func.isRequired,
   stock: PropTypes.number.isRequired,
-  initial: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
+};
+ItemCount.defaultProps = {
+  initial: 1,
 };
 
 export default ItemCount;
