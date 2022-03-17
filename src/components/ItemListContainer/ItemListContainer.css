@@ -1,5 +1,10 @@
 .item-list-container{
 	color: black;
+  text-align: center;
+  margin:0% !important;
+  max-width: 100% !important;
+  padding: 0px;
+  /* width: 100%; */
 }
 .welcome-message{
 	text-align: center;

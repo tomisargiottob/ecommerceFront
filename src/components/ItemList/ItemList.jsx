@@ -7,7 +7,7 @@ function ItemList({ products }) {
   return (
     <Container className="item-list">
       <Row>
-        { products }
+        {products}
       </Row>
     </Container>
   );
