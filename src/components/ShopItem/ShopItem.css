@@ -1,3 +1,18 @@
 .shop-item-container{
 	color: black;
+  margin-bottom: 20px;
+}
+.shop-item-container:hover{
+	box-shadow: 1px gray;
+}
+a{
+  text-decoration: none;
+}
+.fadeIn {
+  animation: fadeInAnimation 2s;
+}
+
+@keyframes fadeInAnimation {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
