@@ -2,7 +2,7 @@ import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Container } from 'react-bootstrap';
-import client from '../../helpers/client';
+import client from '../../helpers/Client';
 import ItemDetail from '../ItemDetail/ItemDetail';
 
 function ItemDetailContainer() {

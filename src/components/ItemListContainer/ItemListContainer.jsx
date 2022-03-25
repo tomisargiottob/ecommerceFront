@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import ItemList from '../ItemList/ItemList';
-import client from '../../helpers/client';
+import client from '../../helpers/Client';
 import './ItemListContainer.css';
 
 function ItemListContainer({ welcome }) {
