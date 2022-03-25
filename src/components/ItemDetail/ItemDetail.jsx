@@ -1,11 +1,14 @@
-import { React } from 'react';
+import { React, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import ItemCount from '../ItemCount/ItemCount';
 import './ItemDetail.css';
 
 function ItemDetail({ product }) {
+  const [state, setState] = useState('button');
   const addToCart = (ammount) => {
+    setState('end');
     if (product.stock >= ammount) {
       const item = product.name + (ammount > 1 ? 's' : '');
       // eslint-disable-next-line no-console
@@ -32,12 +35,25 @@ function ItemDetail({ product }) {
           <p>
             {product.description}
           </p>
-          <ItemCount
-            stock={product.stock}
-            name={product.name}
-            price={product.price}
-            addToCart={addToCart}
-          />
+          { state === 'button'
+            ? (
+              <ItemCount
+                stock={product.stock}
+                name={product.name}
+                price={product.price}
+                addToCart={addToCart}
+              />
+            ) : (
+              <Container>
+                <Row>
+                  <NavLink to="/carrito">
+                    <button type="button" className="add-to-cart">
+                      Terminar mi compra
+                    </button>
+                  </NavLink>
+                </Row>
+              </Container>
+            )}
         </Col>
       </Row>
     </Container>

@@ -13,6 +13,7 @@ a {
 .navbar-nav a.active{
   color:black;
   font-weight: 600;
+  font-size: 1.4rem;
 }
 .nav-bar .search-form{
   padding-top: 13px;
