@@ -4,16 +4,14 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import ItemCount from '../ItemCount/ItemCount';
 import './ItemDetail.css';
+import { useCartContext } from '../../helpers/CartContext';
 
 function ItemDetail({ product }) {
   const [state, setState] = useState('button');
-  const addToCart = (ammount) => {
+  const { addToCart } = useCartContext();
+  const addToCartContext = (ammount) => {
     setState('end');
-    if (product.stock >= ammount) {
-      const item = product.name + (ammount > 1 ? 's' : '');
-      // eslint-disable-next-line no-console
-      console.log(`Se agregarian ${ammount} ${item} al carro`);
-    }
+    addToCart(product, ammount);
   };
 
   return (
@@ -41,7 +39,7 @@ function ItemDetail({ product }) {
                 stock={product.stock}
                 name={product.name}
                 price={product.price}
-                addToCart={addToCart}
+                addToCart={addToCartContext}
               />
             ) : (
               <Container>

@@ -77,7 +77,7 @@ function ItemCount({
           </Row>
           <Row>
             <Col>
-              <button type="button" className="add-to-cart" onClick={addToCart}>
+              <button type="button" className="add-to-cart" onClick={() => addToCart(ammount)}>
                 Agregar al carrito
               </button>
             </Col>
