@@ -1,45 +1,38 @@
 import {
-  Card,
+  Container,
+  Row,
+  Button,
 } from 'react-bootstrap';
-import { React, useState } from 'react';
+import { React } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './ShopItem.css';
 // import ItemCount from '../ItemCount/ItemCount';
 
 function ShopItem({ product }) {
-  const [display, setDisplay] = useState(false);
-
-  const showInfo = () => {
-    // setTimeout(() => {
-    if (display) {
-      setDisplay(false);
-    } else {
-      setDisplay(true);
-    }
-  };
   return (
     <Link to={`/details/${product.id}`}>
-      <Card className="shop-item-container" style={{ width: '18rem' }} onMouseEnter={showInfo} onMouseLeave={showInfo}>
-        <Card.Img variant="top" src={product.thumbnail} />
-        {display && (
-          <Card.Body className="fadeIn">
-            <Card.Title>{product.name}</Card.Title>
-            <Card.Text>
-              {product.price}
-              $
-            </Card.Text>
-          </Card.Body>
-        )}
-        {!display && (
-          <Card.Body className="fadeIn">
-            <Card.Text>
-              {product.price}
-              $
-            </Card.Text>
-          </Card.Body>
-        )}
-      </Card>
+      <Container className="shop-item-container">
+        <Row className="item-thumbnail">
+          <img src={product.thumbnail} alt="" />
+        </Row>
+        <Row>
+          <Container>
+            <Row className="item-price">
+              <h1>
+                {product.price}
+                $
+              </h1>
+            </Row>
+            <Row className="item-name">
+              <p>{product.name}</p>
+            </Row>
+            <Row className="item-details">
+              <Button> Ver detalle </Button>
+            </Row>
+          </Container>
+        </Row>
+      </Container>
     </Link>
   );
 }

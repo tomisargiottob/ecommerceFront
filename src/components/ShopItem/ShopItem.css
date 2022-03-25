@@ -1,15 +1,38 @@
 .shop-item-container{
 	color: black;
   margin-bottom: 20px;
+  background-color: white;
+  padding-top: 10px;
+  border-radius: 10px;
 }
 .shop-item-container:hover{
-	box-shadow: 1px gray;
+  box-shadow: 55px gray;
+}
+.item-thumbnail{
+  border-bottom: 1px solid rgb(182, 181, 181);
+  padding-bottom: 10px;
+}
+.item-price h1{
+  font-size: 1.5rem;
+  text-align: left;
+}
+.item-name{
+  text-align: left;
+  overflow-wrap: break-word;
+}
+.item-details{
+  padding-bottom: 10px;
+  width: 60%;
+  text-align: center;
+  /* margin: 0 auto; */
 }
 a{
   text-decoration: none;
 }
 .fadeIn {
   animation: fadeInAnimation 2s;
+  position: relative;
+  bottom: 0px;
 }
 
 @keyframes fadeInAnimation {
