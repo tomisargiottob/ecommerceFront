@@ -4,8 +4,10 @@ import {
   Nav,
   Form,
   FormControl,
+  InputGroup,
   Button,
 } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
 import { React } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -39,14 +41,17 @@ function NavBar() {
             <NavLink to="/categoria/campera">Camperas</NavLink>
             <NavLink to="/categoria/pantalon">Pantalones</NavLink>
           </Nav>
-          <Form className="d-flex">
-            <FormControl
-              type="search"
-              placeholder="Buscar"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Buscar</Button>
+          <Form className="search-form">
+            <InputGroup className="mb-3">
+              <FormControl
+                placeholder="Buscar"
+                aria-label="Buscar"
+                aria-describedby="basic-addon1"
+              />
+              <Button className="search-button" variant="outline-secondary" id="button-addon2">
+                <FontAwesomeIcon icon="fa-solid fa-search" />
+              </Button>
+            </InputGroup>
           </Form>
           <Nav>
             <NavLink to="/carrito">

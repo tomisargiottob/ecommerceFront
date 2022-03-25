@@ -1,5 +1,6 @@
 .nav-bar{
   width: 100%;
+  background-color: #ec8041e5 !important;
 }
 a {
   text-decoration: none;
@@ -7,9 +8,17 @@ a {
 .navbar-nav a{
   margin: 5px 8px;
   font-size: 1.3rem;
-  color:#6b6b6d;
+  color:#535353;
 }
 .navbar-nav a.active{
   color:black;
   font-weight: 600;
+}
+.nav-bar .search-form{
+  padding-top: 13px;
+}
+.nav-bar .search-button{
+  background-color: white;
+  color: black;
+  border: 1px solid rgb(223, 223, 223);
 }
