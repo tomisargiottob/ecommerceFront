@@ -1,12 +1,6 @@
 .cart-widget{
-	color: rgba(0,0,0,.55);
-	margin-left: 10px;
-	background-color: green;
-	border: 1px solid green;
-}
-.cart-widget:hover{
-	background-color: green;
-}
-.cart-widget:focus{
-	background-color: green;
+  border: none;
+	padding-left: 10px;
+  padding-right: 10px;
+	border: none;
 }
