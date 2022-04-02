@@ -1,33 +1,50 @@
-import { React } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { React, useState } from 'react';
+import {
+  Container,
+  Tabs,
+  Tab,
+} from 'react-bootstrap';
 import { useCartContext } from '../../helpers/CartContext';
+import CartList from '../CartList/CartList';
+import './Cart.css';
 
 function Cart() {
-  const { cartList } = useCartContext();
-  console.log(cartList);
+  const [key, setKey] = useState('cart');
+  const {
+    cartList,
+    addToCart,
+    removeItem,
+    changeAmmount,
+    clearCart,
+  } = useCartContext();
   return (
-    <Container>
-      <h1>
-        Carrito
-      </h1>
-      <ul>
-        <Container>
-          <Row>
-            <Col> Product: </Col>
-            <Col>Quantity</Col>
-            <Col>Price</Col>
-          </Row>
-          { cartList.map((product) => (
-            <li key={product.item.id}>
-              <Row>
-                <Col>{product.item.name}</Col>
-                <Col>{product.quantity}</Col>
-                <Col>{product.quantity * product.item.price}</Col>
-              </Row>
-            </li>
-          ))}
-        </Container>
-      </ul>
+    <Container className="cart-container">
+      <Tabs
+        id="controlled-tab-example"
+        activeKey={key}
+        onSelect={(k) => setKey(k)}
+        className="mb-3"
+      >
+        <Tab eventKey="cart" title={`Carrito (${cartList.length})`}>
+          <CartList
+            products={cartList}
+            type="cart"
+            addToCart={changeAmmount}
+            removeProduct={removeItem}
+            clearCart={clearCart}
+            mode="change"
+          />
+        </Tab>
+        <Tab eventKey="saved" title="Guardados (0)">
+          <CartList
+            products={[]}
+            type={key}
+            addToCart={addToCart}
+            removeProduct={removeItem}
+            clearCart={clearCart}
+          />
+        </Tab>
+      </Tabs>
     </Container>
   );
 }

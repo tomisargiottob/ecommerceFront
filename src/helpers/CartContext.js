@@ -13,6 +13,7 @@ export const useCartContext = () => useContext(Context);
 
 function CartContext({ children }) {
   const [cartList, setCartList] = useState([]);
+
   const addToCart = (item, quantity) => {
     const itemToAdd = { item, quantity };
     let duplicated = false;
@@ -30,12 +31,22 @@ function CartContext({ children }) {
     }
   };
 
+  const changeAmmount = (item, quantity) => {
+    const newCartList = cartList.map((product) => {
+      if (product.item.id === item.id) {
+        return { item: product.item, quantity };
+      }
+      return product;
+    });
+    setCartList(newCartList);
+  };
+
   const removeItem = (item) => {
     const newCartList = cartList.filter((product) => {
       if (product.item.id !== item.id) {
-        return false;
+        return true;
       }
-      return true;
+      return false;
     });
     setCartList(newCartList);
   };
@@ -61,6 +72,7 @@ function CartContext({ children }) {
       removeItem,
       clearCart,
       isInCart,
+      changeAmmount,
     }}
     >
       {children}
