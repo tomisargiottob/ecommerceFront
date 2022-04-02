@@ -4,9 +4,10 @@
   margin-bottom: 30px;
 }
 .item-count{
+  min-width: 40px;
   background-color: white ;
   margin: 0 auto;
-  border:1px solid black;
+  border:1px solid gray;
   width: 80%;
   border-radius: 5px;
 }
@@ -38,6 +39,9 @@ input:focus{
   background-color: white;
   border: none;
   padding: 3px 10px;
+}
+.dropdown div{
+  transform:none !important;
 }
 .options{
   background-color: white ;

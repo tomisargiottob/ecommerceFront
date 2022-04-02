@@ -4,3 +4,11 @@
   padding-right: 10px;
 	border: none;
 }
+
+.cart-notification{
+  background-color: red;
+  color: white;
+  border-radius: 100%;
+  padding:0px 3px;
+  font-size: 12px;
+}

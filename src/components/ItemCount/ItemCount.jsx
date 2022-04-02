@@ -10,7 +10,7 @@ import { useState, React } from 'react';
 import PropTypes from 'prop-types';
 
 function ItemCount({
-  stock, initial = 1, price, addToCart,
+  stock, initial = 1, addToCart, mode = 'add', changeQuantity,
 }) {
   const [ammount, setAmmount] = useState(initial);
 
@@ -18,19 +18,31 @@ function ItemCount({
     if (value >= 1) {
       if (value > stock) {
         setAmmount(stock);
+        if (changeQuantity) {
+          changeQuantity(stock);
+        }
       } else {
         setAmmount(Number(value));
+        if (changeQuantity) {
+          changeQuantity(value);
+        }
       }
     }
   };
   const onAdd = () => {
     if (ammount + 1 <= stock) {
       setAmmount(ammount + 1);
+      if (changeQuantity) {
+        changeQuantity(ammount + 1);
+      }
     }
   };
   const remove = () => {
     if (ammount - 1 >= 1) {
       setAmmount(ammount - 1);
+      if (changeQuantity) {
+        changeQuantity(ammount - 1);
+      }
     }
   };
 
@@ -46,13 +58,6 @@ function ItemCount({
     <div>
       { stock ? (
         <Container className="item-count-container">
-          <Row>
-            <p>
-              <strong>
-                {`Precio Total: ${price * ammount} $`}
-              </strong>
-            </p>
-          </Row>
           <Row className="item-count">
             <Col xs={3}>
               <button type="button" className="change-ammount" onClick={remove}>
@@ -75,22 +80,22 @@ function ItemCount({
               </button>
             </Col>
           </Row>
-          <Row>
-            <Col>
-              <button type="button" className="add-to-cart" onClick={() => addToCart(ammount)}>
-                Agregar al carrito
-              </button>
-            </Col>
-          </Row>
+          {
+            mode === 'add'
+            && (
+            <Row>
+              <Col>
+                <button type="button" className="add-to-cart" onClick={() => addToCart(ammount)}>
+                  Agregar al carrito
+                </button>
+              </Col>
+            </Row>
+            )
+          }
         </Container>
       )
         : (
           <Container>
-            <Row>
-              <p>
-                {`Precio Unitario: ${price} $`}
-              </p>
-            </Row>
             <Row>
               <h1>No hay stock</h1>
             </Row>
@@ -101,12 +106,16 @@ function ItemCount({
 }
 ItemCount.propTypes = {
   initial: PropTypes.number,
-  addToCart: PropTypes.func.isRequired,
+  addToCart: PropTypes.func,
   stock: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
+  mode: PropTypes.string,
+  changeQuantity: PropTypes.func,
 };
 ItemCount.defaultProps = {
   initial: 1,
+  mode: 'add',
+  changeQuantity: () => {},
+  addToCart: () => {},
 };
 
 export default ItemCount;

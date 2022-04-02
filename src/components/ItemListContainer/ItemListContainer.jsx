@@ -13,11 +13,19 @@ function ItemListContainer({ welcome }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    client.getProductsHeroku(category)
-      .then((items) => {
-        setProducts(items);
-        setLoading(false);
-      });
+    if (category) {
+      client.getCategoryProductsFirebase(category)
+        .then((items) => {
+          setProducts(items);
+          setLoading(false);
+        });
+    } else {
+      client.getProductsFirebase()
+        .then((items) => {
+          setProducts(items);
+          setLoading(false);
+        });
+    }
   }, [category]);
 
   if (loading) {

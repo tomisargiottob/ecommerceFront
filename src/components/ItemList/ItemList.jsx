@@ -1,17 +1,15 @@
-import { React } from 'react';
+import { React, memo } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import './ItemList.css';
 
-function ItemList({ products }) {
-  return (
-    <Container className="item-list">
-      <Row>
-        {products}
-      </Row>
-    </Container>
-  );
-}
+const ItemList = memo(({ products }) => (
+  <Container className="item-list">
+    <Row>
+      {products}
+    </Row>
+  </Container>
+));
 ItemList.propTypes = {
   products: PropTypes.arrayOf(
     PropTypes.node,

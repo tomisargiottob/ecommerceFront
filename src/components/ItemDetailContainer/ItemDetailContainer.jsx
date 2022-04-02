@@ -11,7 +11,7 @@ function ItemDetailContainer() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    client.getProductByIdHeroku(id).then((productFetched) => {
+    client.getProductByIdFirebase(id).then((productFetched) => {
       setProduct(productFetched);
       setLoading(false);
     });

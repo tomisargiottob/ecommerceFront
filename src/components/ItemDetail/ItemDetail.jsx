@@ -8,6 +8,7 @@ import { useCartContext } from '../../helpers/CartContext';
 
 function ItemDetail({ product }) {
   const [state, setState] = useState('button');
+  const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCartContext();
   const addToCartContext = (ammount) => {
     setState('end');
@@ -33,13 +34,18 @@ function ItemDetail({ product }) {
           <p>
             {product.description}
           </p>
+          <p>
+            <strong>
+              {`Precio Total: ${product.price * quantity} $`}
+            </strong>
+          </p>
           { state === 'button'
             ? (
               <ItemCount
                 stock={product.stock}
                 name={product.name}
-                price={product.price}
                 addToCart={addToCartContext}
+                changeQuantity={setQuantity}
               />
             ) : (
               <Container>
