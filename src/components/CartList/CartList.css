@@ -10,10 +10,6 @@
   font-size: 25px;
   text-align: left;
 }
-/* .product-image{
-  height: 200px;
-  width: 150px;
-} */
 .product-price{
   font-size: 1.5rem;
   margin-top: 10px;
@@ -35,4 +31,12 @@
   background-color: white;
   border: none;
   color: blue;
+}
+.product-separator{
+  margin-top: 10px;
+  height: 0.1px;
+  border: none;
+}
+.confirm-cart{
+  max-width: 200px;
 }

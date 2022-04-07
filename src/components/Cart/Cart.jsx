@@ -4,7 +4,7 @@ import {
   Tabs,
   Tab,
 } from 'react-bootstrap';
-import { useCartContext } from '../../helpers/CartContext';
+import { useCartContext } from '../../context/CartContext';
 import CartList from '../CartList/CartList';
 import './Cart.css';
 

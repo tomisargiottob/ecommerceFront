@@ -17,6 +17,7 @@ function CartList({
   removeProduct,
   mode,
   clearCart,
+  createOrder,
 }) {
   let totalPrice = 0;
   const quantities = products.reduce((total, product) => {
@@ -61,22 +62,33 @@ function CartList({
                 <Col xs={2} className="product-price">
                   {`$ ${quantities[product.item.id] * product.item.price}`}
                 </Col>
+                <hr className="product-separator" />
               </Row>
             ))}
-            <hr />
             <Row>
               <Col xs={{ span: 3, offset: 7 }} className="total-price">
-                Precio total sin envío:
+                Total sin envío:
               </Col>
               <Col xs={{ span: 2 }} className="total-price">
                 {`$ ${totalPrice} `}
               </Col>
             </Row>
-            <Row>
+            <Row className="cartlist-buttons">
+              <hr className="product-separator" />
               <Col xs={{ span: 2 }}>
                 <Button variant="danger" onClick={clearCart}>
                   Vaciar Carrito
                 </Button>
+              </Col>
+              <Col xs={{ span: 2, offset: 8 }}>
+                { CartList.length
+                && (
+                  <NavLink to="/carrito/comprar">
+                    <Button onClick={createOrder}>
+                      Finalizar Compra
+                    </Button>
+                  </NavLink>
+                )}
               </Col>
             </Row>
           </div>
@@ -122,11 +134,13 @@ CartList.propTypes = {
   addToCart: PropTypes.func.isRequired,
   removeProduct: PropTypes.func.isRequired,
   clearCart: PropTypes.func.isRequired,
+  createOrder: PropTypes.func,
   mode: PropTypes.string,
 };
 
 CartList.defaultProps = {
   mode: 'add',
+  createOrder: () => {},
 };
 
 export default CartList;
