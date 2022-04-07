@@ -8,7 +8,7 @@
   background-color: white ;
   margin: 0 auto;
   border:1px solid gray;
-  width: 80%;
+  max-width: 200px;
   border-radius: 5px;
 }
 .ammount{
@@ -31,7 +31,7 @@ input:focus{
 .add-to-cart{
   margin-top: 5px;
   border-radius: 5px;
-  width: 80%;
+  width: 200px;
   border: 1px solid black;
 }
 #dropdown-autoclose-true{
@@ -45,4 +45,9 @@ input:focus{
 }
 .options{
   background-color: white ;
+}
+.available-stock{
+  width: 100%;
+  margin: 0 auto;
+  font-size: 0.8rem;
 }

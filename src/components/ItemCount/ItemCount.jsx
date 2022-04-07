@@ -24,7 +24,7 @@ function ItemCount({
       } else {
         setAmmount(Number(value));
         if (changeQuantity) {
-          changeQuantity(value);
+          changeQuantity(Number(value));
         }
       }
     }
@@ -49,7 +49,7 @@ function ItemCount({
   const dropDownOptions = [];
   for (let i = 1; i <= stock; i += 1) {
     dropDownOptions.push(
-      <Dropdown.Item key={i} eventKey={i}>
+      <Dropdown.Item key={i} eventKey={Number(i)}>
         {i}
       </Dropdown.Item>,
     );
@@ -78,6 +78,11 @@ function ItemCount({
               <button type="button" className="change-ammount" onClick={onAdd}>
                 <FontAwesomeIcon icon="fa-solid fa-plus" />
               </button>
+            </Col>
+          </Row>
+          <Row className="available-stock">
+            <Col>
+              { `(Disponible: ${stock})` }
             </Col>
           </Row>
           {
