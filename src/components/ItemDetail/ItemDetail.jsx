@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import ItemCount from '../ItemCount/ItemCount';
 import './ItemDetail.css';
-import { useCartContext } from '../../helpers/CartContext';
+import { useCartContext } from '../../context/CartContext';
 
 function ItemDetail({ product }) {
   const [state, setState] = useState('button');
