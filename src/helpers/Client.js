@@ -10,6 +10,8 @@ import {
   getDocs,
   query,
   where,
+  addDoc,
+  updateDoc,
 } from 'firebase/firestore';
 import ShopItem from '../components/ShopItem/ShopItem';
 
@@ -42,29 +44,67 @@ class Client {
   }
 
   async getProductsFirebase() {
-    this.db = getFirestore();
-    const queryCollection = collection(this.db, 'products');
-    const prodCollection = await getDocs(queryCollection);
-    const products = prodCollection.docs.map((product) => ({ id: product.id, ...product.data() }));
-    const listItems = products.map((product) => (<Col className="shop-item" xs={12} md={6} lg={4} xl={3} key={product.id}><ShopItem product={product} /></Col>));
-    return listItems;
+    try {
+      this.db = getFirestore();
+      const queryCollection = collection(this.db, 'products');
+      const prodCollection = await getDocs(queryCollection);
+      const products = prodCollection.docs.map(
+        (product) => ({ id: product.id, ...product.data() }),
+      );
+      const listItems = products.map((product) => (<Col className="shop-item" xs={12} md={6} lg={4} xl={3} key={product.id}><ShopItem product={product} /></Col>));
+      return listItems;
+    } catch (err) {
+      return err.message;
+    }
   }
 
   async getProductByIdFirebase(id) {
-    this.db = getFirestore();
-    const queryDoc = doc(this.db, 'products', id);
-    const product = await getDoc(queryDoc);
-    return { id: product.id, ...product.data() };
+    try {
+      this.db = getFirestore();
+      const queryDoc = doc(this.db, 'products', id);
+      const product = await getDoc(queryDoc);
+      return { id: product.id, ...product.data() };
+    } catch (err) {
+      return err.message;
+    }
   }
 
   async getCategoryProductsFirebase(category) {
-    this.db = getFirestore();
-    const queryCollection = collection(this.db, 'products');
-    const queryFilter = query(queryCollection, where('category', '==', category));
-    const prodCollection = await getDocs(queryFilter);
-    const products = prodCollection.docs.map((product) => ({ id: product.id, ...product.data() }));
-    const listItems = products.map((product) => (<Col className="shop-item" xs={12} md={6} lg={4} xl={3} key={product.id}><ShopItem product={product} /></Col>));
-    return listItems;
+    try {
+      this.db = getFirestore();
+      const queryCollection = collection(this.db, 'products');
+      const queryFilter = query(queryCollection, where('category', '==', category));
+      const prodCollection = await getDocs(queryFilter);
+      const products = prodCollection.docs.map(
+        (product) => ({ id: product.id, ...product.data() }),
+      );
+      const listItems = products.map((product) => (<Col className="shop-item" xs={12} md={6} lg={4} xl={3} key={product.id}><ShopItem product={product} /></Col>));
+      return listItems;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
+  async updateProductFirebase(id, product) {
+    try {
+      this.db = getFirestore();
+      const queryUpdate = doc(this.db, 'products', id);
+      updateDoc(queryUpdate, product);
+      return id;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
+  async createOrderFirebase(order) {
+    try {
+      this.db = getFirestore();
+      const queryCollection = collection(this.db, 'orders');
+      const { id } = await addDoc(queryCollection, order);
+      return id;
+    } catch (err) {
+      return err.message;
+    }
   }
 }
 
