@@ -12,7 +12,8 @@ import Cart from './components/Cart/Cart';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import Login from './components/Login/Login';
-import CartContextProvider from './helpers/CartContext';
+import CartContextProvider from './context/CartContext';
+import Order from './components/Order/Order';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/categoria/:category" element={<ItemListContainer welcome="Mashipa Store" />} />
             <Route path="/carrito" element={<Cart />} />
             <Route path="/details/:id" element={<ItemDetailContainer />} />
+            <Route path="/carrito/comprar" element={<Order />} />
             <Route path="/*" element={<Navigate to="/" />} />
           </Routes>
         </Container>
