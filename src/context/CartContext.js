@@ -20,6 +20,9 @@ function CartContext({ children }) {
     const newCartList = cartList.map((product) => {
       if (product.item.id === item.id) {
         duplicated = true;
+        if (product.quantity + quantity >= product.item.stock) {
+          return { item: product.item, quantity: product.item.stock };
+        }
         return { item: product.item, quantity: product.quantity + quantity };
       }
       return product;
