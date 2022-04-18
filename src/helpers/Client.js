@@ -23,7 +23,6 @@ class Client {
     }
     const products = await fetch(url);
     const parsedProducts = await products.json();
-    console.log('desde el backend', parsedProducts);
     // eslint-disable-next-line max-len
     const listItems = parsedProducts.map((product) => (<Col className="shop-item" xs={12} md={6} lg={4} xl={3} key={product.id}><ShopItem product={product} /></Col>));
     return listItems;
@@ -32,27 +31,55 @@ class Client {
   async getProductByIdHeroku(id) {
     const product = await fetch(`https://ecommercesargiotto.herokuapp.com/api/products/${id}`);
     const parsedProduct = await product.json();
-    console.log('por id', parsedProduct);
     return parsedProduct;
   }
 
   async getCategoryProductsHeroku(category) {
     const products = await fetch(`https://ecommercesargiotto.herokuapp.com/api/products/${category}`);
     const parsedProducts = await products.json();
-    console.log('por categoría', parsedProducts);
     return parsedProducts;
   }
 
-  async getProductsFirebase() {
+  async getProductsFirebase(filter) {
     try {
       this.db = getFirestore();
       const queryCollection = collection(this.db, 'products');
-      const prodCollection = await getDocs(queryCollection);
+      let queryFilter = queryCollection;
+      if (filter.category && filter.maxPrice) {
+        queryFilter = query(
+          queryCollection,
+          where('price', '<=', Number(filter.maxPrice)),
+          where('price', '>=', Number(filter.minPrice)),
+          where('category', '==', filter.category),
+        );
+      } else if (filter.category) {
+        queryFilter = query(
+          queryCollection,
+          where('category', '==', filter.category),
+        );
+      } else if (filter.maxPrice) {
+        queryFilter = query(
+          queryCollection,
+          where('price', '<=', Number(filter.maxPrice)),
+          where('price', '>=', Number(filter.minPrice)),
+        );
+      }
+      const prodCollection = await getDocs(queryFilter);
+      let highestPrice = 0;
+      let lowestPrice;
       const products = prodCollection.docs.map(
         (product) => ({ id: product.id, ...product.data() }),
       );
-      const listItems = products.map((product) => (<Col className="shop-item" xs={12} md={6} lg={4} xl={3} key={product.id}><ShopItem product={product} /></Col>));
-      return listItems;
+      const listItems = products.map((product) => {
+        if (product.price > highestPrice) {
+          highestPrice = product.price;
+        }
+        if (!lowestPrice || lowestPrice > product.price) {
+          lowestPrice = product.price;
+        }
+        return (<Col className="shop-item" xs={12} md={6} lg={4} xl={3} key={product.id}><ShopItem product={product} /></Col>);
+      });
+      return { listItems, highestPrice, lowestPrice };
     } catch (err) {
       return err.message;
     }
@@ -64,22 +91,6 @@ class Client {
       const queryDoc = doc(this.db, 'products', id);
       const product = await getDoc(queryDoc);
       return { id: product.id, ...product.data() };
-    } catch (err) {
-      return err.message;
-    }
-  }
-
-  async getCategoryProductsFirebase(category) {
-    try {
-      this.db = getFirestore();
-      const queryCollection = collection(this.db, 'products');
-      const queryFilter = query(queryCollection, where('category', '==', category));
-      const prodCollection = await getDocs(queryFilter);
-      const products = prodCollection.docs.map(
-        (product) => ({ id: product.id, ...product.data() }),
-      );
-      const listItems = products.map((product) => (<Col className="shop-item" xs={12} md={6} lg={4} xl={3} key={product.id}><ShopItem product={product} /></Col>));
-      return listItems;
     } catch (err) {
       return err.message;
     }
