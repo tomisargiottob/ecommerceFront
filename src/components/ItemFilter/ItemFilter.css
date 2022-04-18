@@ -1,0 +1,15 @@
+.filter-container{
+  background-color: white;
+  padding-top: 10px;
+  min-width: 250px;
+  max-width: 350px;
+  border-radius: 5px;
+  min-height: 250px;
+}
+.filter-options{
+  padding-top: 20px;
+  margin: 0 auto;
+}
+.filter-submit{
+  margin: 20px 0px;
+}
