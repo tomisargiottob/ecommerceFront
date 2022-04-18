@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import { useCartContext } from '../../context/CartContext';
 import './ShopItem.css';
-// import ItemCount from '../ItemCount/ItemCount';
 
 function ShopItem({ product }) {
   const { addToCart } = useCartContext();

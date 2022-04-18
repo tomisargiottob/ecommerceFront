@@ -50,6 +50,11 @@ function ItemDetail({ product }) {
             ) : (
               <Container>
                 <Row>
+                  <NavLink to="/">
+                    <button type="button" className="add-to-cart">
+                      Seguir Comprando
+                    </button>
+                  </NavLink>
                   <NavLink to="/carrito">
                     <button type="button" className="add-to-cart">
                       Terminar mi compra

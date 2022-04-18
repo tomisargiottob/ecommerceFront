@@ -36,7 +36,6 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavLink to="/">Inicio</NavLink>
-            {/* <NavLink to="/aboutUs">Quienes Somos</NavLink> */}
             <NavLink to="/categoria/buso">Busos</NavLink>
             <NavLink to="/categoria/campera">Camperas</NavLink>
             <NavLink to="/categoria/pantalon">Pantalones</NavLink>

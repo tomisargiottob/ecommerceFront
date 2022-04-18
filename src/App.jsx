@@ -25,7 +25,7 @@ function App() {
           </Row>
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<ItemListContainer welcome="Welcome to Mashipa Store" />} />
+            <Route path="/" element={<ItemListContainer welcome="Mashipa Store" />} />
             <Route path="/categoria/:category" element={<ItemListContainer welcome="Mashipa Store" />} />
             <Route path="/carrito" element={<Cart />} />
             <Route path="/details/:id" element={<ItemDetailContainer />} />
