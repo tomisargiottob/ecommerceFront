@@ -21,6 +21,7 @@ function Order() {
     aux[value.target.name] = value.target.value;
     setFormData({ ...formData, ...aux });
   };
+  const orderCreated = id && JSON.parse(sessionStorage.getItem(`${id}`));
   const total = cartList.reduce((acc, product) => acc + product.item.price * product.quantity, 0);
   const createOrder = async (event) => {
     const form = event.currentTarget;
@@ -32,15 +33,22 @@ function Order() {
         products: cartList.map((product) => (
           {
             id: product.item.id,
-            title: product.item.name,
+            name: product.item.name,
             price: product.item.price,
+            quantity: product.quantity,
           })),
         date: new Date(),
         total,
       };
       const orderId = await client.createOrderFirebase(order);
       setId(orderId);
+      sessionStorage.setItem(`${orderId}`, JSON.stringify(order));
       clearCart();
+      cartList.forEach((product) => {
+        const productAux = product.item;
+        productAux.stock = product.item.stock - product.quantity;
+        client.updateProductFirebase(productAux.id, productAux);
+      });
     }
     setValidated(true);
   };
@@ -81,7 +89,7 @@ function Order() {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Correo Electrónico</Form.Label>
-              <Form.Control required type="email" name="email" placeholder="correo electronico" />
+              <Form.Control required type="email" name="email" placeholder="Correo electronico" />
               <Form.Text className="text-muted">
                 No enviaremos spam.
               </Form.Text>
@@ -126,9 +134,15 @@ function Order() {
                 </Row>
                 <Row>
                   <Col sm={{ span: 4, offset: 4 }}>
-                    CVU: EJEMPLO.DE.CVU
-                    Nombre: cuenta ejemplo srl
-                    Banco: Ejemplo SA.
+                    <Row>
+                      CVU: EJEMPLO.DE.CVU
+                    </Row>
+                    <Row>
+                      Nombre: cuenta ejemplo srl
+                    </Row>
+                    <Row>
+                      Banco: Ejemplo SA.
+                    </Row>
                   </Col>
                 </Row>
               </Container>
@@ -180,14 +194,14 @@ function Order() {
                 <h5 className="mb-4">
                   Resumen de compra:
                 </h5>
-                { cartList.map((product) => (
-                  <Row key={product.item.id}>
+                { ((orderCreated && orderCreated.products) || cartList).map((product) => (
+                  <Row key={product.id || product.item.id}>
                     <Col className="order-product-name">
-                      {product.item.name}
+                      {product.name || product.item.name}
                       {`(${product.quantity})`}
                     </Col>
                     <Col>
-                      {product.quantity * product.item.price}
+                      {product.quantity * (product.price || product.item.price)}
                       $
                     </Col>
                   </Row>
@@ -200,7 +214,7 @@ function Order() {
                 Precio Total:
               </Col>
               <Col>
-                {total}
+                { (orderCreated && orderCreated.total) || total}
                 $
               </Col>
             </Row>
